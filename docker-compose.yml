@@ -1,0 +1,17 @@
+version: '1.0.0'
+
+services:
+  xCore:
+    container_name: xCore
+    build: xc.Dockerfile
+    pull_policy: if_not_present
+  xAnor:
+    container_name: xAnor
+    build: xa.Dockerfile
+    pull_policy: if_not_present
+  xTrade:
+    container_name: xTrade
+    build: xt.Dockerfile
+    pull_policy: if_not_present
+
+

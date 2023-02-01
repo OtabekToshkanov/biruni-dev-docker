@@ -29,24 +29,18 @@ RUN wget https://dlcdn.apache.org/tomcat/tomcat-${TOMCAT_MAJOR}/v${TOMCAT_VERSIO
 
 RUN chmod +x ${CATALINA_HOME}/bin/*sh
 
-# Create Tomcat admin user
-ADD create_admin_user.sh $CATALINA_HOME/scripts/create_admin_user.sh
-ADD tomcat.sh $CATALINA_HOME/scripts/tomcat.sh
-RUN chmod +x $CATALINA_HOME/scripts/*.sh
-
-# Create tomcat user
-RUN groupadd -r tomcat && \
- useradd -g tomcat -d ${CATALINA_HOME} -s /sbin/nologin  -c "Tomcat user" tomcat && \
- chown -R tomcat:tomcat ${CATALINA_HOME}
-
 WORKDIR /opt/tomcat
 
-COPY ./lib/* ./lib/ 
-COPY ./webapps/* ./webapps/ 
+# default properties
+# TODO now working because container override when valume binded
+COPY biruni-properties ./projects/biruni/
 
+COPY ./biruni/ ./webapps/
+COPY ./tomcat-lib/* ./lib/ 
+
+RUN rm -f conf/tomcat-users.xml
+COPY conf conf/
 
 EXPOSE 8080
-EXPOSE 8009
 
-USER tomcat
-CMD ["tomcat.sh"]
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
