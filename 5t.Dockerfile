@@ -1,5 +1,3 @@
-# xCore + xAnor + xTrade
-
 # Centos based container with Java and Tomcat
 FROM centos:centos7
 
