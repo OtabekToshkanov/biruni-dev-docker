@@ -34,12 +34,28 @@ WORKDIR /opt/tomcat
 # Copying biruni files
 COPY ./biruni5x/ ./webapps/smartup5x_core/
 COPY ./projects/smartup5x_core/WEB-INF ./webapps/smartup5x_core/WEB-INF
+
+COPY ./biruni5x/ ./webapps/smartup5x_anor/
+COPY ./projects/smartup5x_anor/WEB-INF ./webapps/smartup5x_anor/WEB-INF
+
+COPY ./biruni5x/ ./webapps/smartup5x_trade/
+COPY ./projects/smartup5x_trade/WEB-INF ./webapps/smartup5x_trade/WEB-INF
+
 COPY ./biruni5x_libs/* ./lib/ 
+
+# 5trade
+COPY ./biruni5/ ./webapps/smartup5_trade/
+COPY ./projects/smartup5_trade/WEB-INF ./webapps/smartup5_trade/WEB-INF
+COPY ./biruni5_libs/* ./lib/ 
+
 
 # copying default properties
 # TODO now working because container override when valume binded
 COPY ./projects/smartup5x_core/smartup5x_core.properties ./projects/biruni/
+COPY ./projects/smartup5x_anor/smartup5x_anor.properties ./projects/biruni/
+COPY ./projects/smartup5x_trade/smartup5x_trade.properties ./projects/biruni/
 
+COPY ./projects/smartup5_trade/smartup5_trade.properties ./projects/biruni/
 
 
 

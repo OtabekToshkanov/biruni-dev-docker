@@ -33,6 +33,7 @@ WORKDIR /opt/tomcat
 
 # Copying biruni files
 COPY ./biruni5x/ ./webapps/smartup5x_trade/
+COPY ./projects/smartup5x_trade/WEB-INF ./webapps/smartup5x_trade/WEB-INF
 COPY ./biruni5x_libs/* ./lib/ 
 
 # copying default properties

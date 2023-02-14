@@ -31,17 +31,21 @@ RUN chmod +x ${CATALINA_HOME}/bin/*sh
 
 WORKDIR /opt/tomcat
 
-# default properties
+# Copying biruni files
+COPY ./biruni5/ ./webapps/smartup5_trade/
+COPY ./projects/smartup5_trade/WEB-INF ./webapps/smartup5_trade/WEB-INF
+COPY ./biruni5_libs/* ./lib/ 
+
+# copying default properties
 # TODO now working because container override when valume binded
-COPY biruni-properties ./projects/biruni/
+COPY ./projects/smartup5_trade/smartup5_trade.properties ./projects/biruni/
 
 
 
-COPY ./webapps/smartup5x_trade/ ./webapps/smartup5x_trade/
-COPY ./lib/* ./lib/ 
+
 
 RUN rm -f conf/tomcat-users.xml
-COPY conf conf/
+COPY tomcat-conf/ conf/
 
 EXPOSE 8080
 
