@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:javaee="http://java.sun.com/xml/ns/javaee"
+  xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+  
+  <context-param>
+    <param-name>project_folder:anor</param-name>
+    <param-value>/opt/tomcat/projects/smartup5_anor</param-value>
+  </context-param>
+ <context-param>
+    <param-name>project_folder:trade</param-name>
+    <param-value>/opt/tomcat/projects/smartup5_trade</param-value>
+  </context-param>
+  <context-param>
+    <param-name>editor_path</param-name>
+     <param-value>/opt/tomcat/projects/editor_runner</param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>biruni_dev</servlet-name>
+    <servlet-class>uz.greenwhite.biruni.dev.ProjectManager</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>biruni_dev</servlet-name>
+    <url-pattern>/page/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>biruni_dev</servlet-name>
+    <url-pattern>/dev/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- Folder where to load setting file [contextPath.properties] (WEB-INF
+    folder if it is not defined) -->
+  <context-param>
+    <param-name>setting_path</param-name>
+    <param-value>~/biruni</param-value>
+  </context-param>
+
+  <!-- the time and day interval of job for cleaning biruni files (time/day_interval) -->
+  <!--
+  <context-param>
+    <param-name>bf_scheduler</param-name>
+    <param-value>00:00/7</param-value>
+  </context-param>
+  -->
+
+  <listener>
+    <listener-class>uz.greenwhite.biruni.MyContextListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>org.apache.commons.fileupload.servlet.FileCleanerCleanup</listener-class>
+  </listener>
+
+  <servlet>
+    <servlet-name>biruni</servlet-name>
+    <servlet-class>uz.greenwhite.biruni.OracleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>biruni</servlet-name>
+    <url-pattern>/b/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>cos_request</servlet-name>
+    <servlet-class>uz.greenwhite.biruni.COSRequest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cos_request</servlet-name>
+    <url-pattern>/util/cos_request</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>zktime</servlet-name>
+    <servlet-class>uz.greenwhite.biruni.ZKTime</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>zktime</servlet-name>
+    <url-pattern>/iclock/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>push_notify_service</servlet-name>
+    <servlet-class>uz.greenwhite.biruni.PushNotificationService</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>push_notify_service</servlet-name>
+    <url-pattern>/util/push_notify</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>barcode</servlet-name>
+    <servlet-class>uz.greenwhite.biruni.BarcodeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>barcode</servlet-name>
+    <url-pattern>/gen/barcode</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>session_info</servlet-name>
+    <servlet-class>uz.greenwhite.biruni.SessionInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>session_info</servlet-name>
+    <url-pattern>/util/session_info</url-pattern>
+  </servlet-mapping>
+
+  <filter>
+    <filter-name>GzipFilter</filter-name>
+    <filter-class>uz.greenwhite.biruni.http.GZipServletFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>GzipFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!-- Error Handling -->
+  <servlet>
+    <servlet-name>ErrorHandler</servlet-name>
+    <servlet-class>uz.greenwhite.biruni.ErrorHandler</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ErrorHandler</servlet-name>
+    <url-pattern>/ErrorHandler</url-pattern>
+  </servlet-mapping>
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/ErrorHandler</location>
+  </error-page>
+  <error-page>
+    <error-code>403</error-code>
+    <location>/ErrorHandler</location>
+  </error-page>
+
+  <error-page>
+    <exception-type>java.lang.Throwable</exception-type>
+    <location>/ErrorHandler</location>
+  </error-page>
+</web-app>

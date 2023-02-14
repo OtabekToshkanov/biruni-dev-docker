@@ -12,7 +12,7 @@
   </context-param>
   <context-param>
     <param-name>editor_path</param-name>
-     <param-value>/opt/tomcat/projects/runner</param-value>
+     <param-value>/opt/tomcat/projects/editor_runner</param-value>
   </context-param>
   <context-param>
     <param-name>google_translate_api_key</param-name>
