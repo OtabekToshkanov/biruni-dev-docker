@@ -38,7 +38,9 @@ COPY ./biruni5x_libs/* ./lib/
 
 # copying default properties
 # TODO now working because container override when valume binded
-COPY ./projects/smartup5x_trade/smartup5x_trade.properties ./projects/biruni/
+RUN mkdir ./project/
+RUN mkdir ./project/biruni/
+COPY ./projects/smartup5x_trade/*.properties ./project/biruni/
 
 
 

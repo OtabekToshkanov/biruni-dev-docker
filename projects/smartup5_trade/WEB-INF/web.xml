@@ -2,6 +2,10 @@
 <web-app xmlns:javaee="http://java.sun.com/xml/ns/javaee"
   xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
+  <context-param>
+    <param-name>setting_path</param-name>
+    <param-value>/opt/tomcat/biruni/</param-value>
+  </context-param>
   
   <context-param>
     <param-name>project_folder:anor</param-name>
@@ -30,10 +34,7 @@
 
   <!-- Folder where to load setting file [contextPath.properties] (WEB-INF
     folder if it is not defined) -->
-  <context-param>
-    <param-name>setting_path</param-name>
-    <param-value>~/biruni</param-value>
-  </context-param>
+
 
   <!-- the time and day interval of job for cleaning biruni files (time/day_interval) -->
   <!--

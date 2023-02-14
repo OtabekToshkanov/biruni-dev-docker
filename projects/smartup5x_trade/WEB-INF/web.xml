@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:javaee="http://java.sun.com/xml/ns/javaee"
   xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-
+  <context-param>
+    <param-name>setting_path</param-name>
+    <param-value>/opt/tomcat/project/biruni/</param-value>
+  </context-param>
   <context-param>
     <param-name>project_folder:core</param-name>
     <param-value>/opt/tomcat/projects/smartup5x_core</param-value>
@@ -60,10 +63,6 @@
 
   <!-- Folder where to load setting file [contextPath.properties] (WEB-INF
     folder if it is not defined) -->
-  <context-param>
-    <param-name>setting_path</param-name>
-    <param-value>~/biruni</param-value>
-  </context-param>
 
   <!-- interval measured by minutes -->
   <context-param>
