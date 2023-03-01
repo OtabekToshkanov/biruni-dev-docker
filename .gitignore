@@ -1,3 +1,7 @@
+.idea/
+.vscode/
+*.iml
+
 biruni5/
 biruni5_libs/
 

@@ -1,9 +1,10 @@
-version: '1.0.0'
+version: '3.0.0'
 
 services:
-  xt:
-    container_name: xt
-    build: ./xt.Dockerfile
+  smartup5x_trade:
+    container_name: smartup5x_trade
+    build: ./smartup5x_trade.Dockerfile
     pull_policy: if_not_present
+
 
 

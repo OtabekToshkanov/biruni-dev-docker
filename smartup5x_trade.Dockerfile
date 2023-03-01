@@ -20,7 +20,7 @@ RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=acc
 
 # Install Tomcat
 ENV TOMCAT_MAJOR 9
-ENV TOMCAT_VERSION 9.0.71
+ENV TOMCAT_VERSION 9.0.72
 
 RUN wget https://dlcdn.apache.org/tomcat/tomcat-${TOMCAT_MAJOR}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
  tar -xvf apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
@@ -34,19 +34,30 @@ WORKDIR /opt/tomcat
 # Copying biruni files
 COPY ./biruni5x/ ./webapps/smartup5x_core/
 COPY ./projects/smartup5x_core/WEB-INF ./webapps/smartup5x_core/WEB-INF
-COPY ./biruni5x_libs/* ./lib/ 
 
-# copying default properties
-# TODO now working because container override when valume binded
-COPY ./projects/smartup5x_core/smartup5x_core.properties ./projects/biruni/
+COPY ./biruni5x/ ./webapps/smartup5x_anor/
+COPY ./projects/smartup5x_anor/WEB-INF ./webapps/smartup5x_anor/WEB-INF
 
+COPY ./biruni5x/ ./webapps/smartup5x_trade/
+COPY ./projects/smartup5x_trade/WEB-INF ./webapps/smartup5x_trade/WEB-INF
 
+COPY ./biruni5x_libs/* ./lib/
 
+# Copying project preraration scripts
+RUN mkdir ./biruni/
+COPY projects/smartup5x_core/smartup5x_core.sh ./biruni/
+COPY projects/smartup5x_anor/smartup5x_anor.sh ./biruni/
+COPY projects/smartup5x_trade/smartup5x_trade.sh ./biruni/
 
-
+# Copying tomcat configuration
+#TO DO: config is not working
 RUN rm -f conf/tomcat-users.xml
 COPY tomcat-conf/ conf/
 
 EXPOSE 8080
+
+ENTRYPOINT ["/opt/tomcat/biruni/smartup5x_core.sh"]
+ENTRYPOINT ["/opt/tomcat/biruni/smartup5x_anor.sh"]
+ENTRYPOINT ["/opt/tomcat/biruni/smartup5x_trade.sh"]
 
 CMD ["/opt/tomcat/bin/catalina.sh", "run"]

@@ -1,11 +1,9 @@
-<ul>
-    <li> 5t   - smartup5_trade </li>
-    <li> xc   - smartup5x_core </li>
-    <li> xa   - smartup5x_anor </li>
-    <li> xt   - smartup5x_trade </li>
-</ul>
-
+Build docker image
 <code>
-docker image build -t xt:latest -f xt.Dockerfile .
-docker container run -itd -p 9090:8080 -v E:\projects\active:/opt/tomcat/projects --name xa xa:latest
+docker build -t [name]:[tag] -f [name].Dockerfile .
+</code>
+
+Run docker container
+<code>
+docker run -itd -p [port]:8080 -v [projects_path]:/opt/tomcat/projects --rm --name [name] smartup5x_trade:[tag]
 </code>
